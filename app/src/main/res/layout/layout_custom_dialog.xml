@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="20dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/change_password"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/pass1"
+            style="@style/LoginTextInputInnerFieldStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Type your password"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="@+id/textView16"
+            app:layout_constraintStart_toStartOf="@+id/textView16"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/pass2"
+            style="@style/LoginTextInputInnerFieldStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Type your password"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="@+id/textView16"
+            app:layout_constraintStart_toStartOf="@+id/textView16"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                style="@style/Widget.Material3.Button.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:id="@+id/btnNo"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Cancel"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/pass2"
+                app:layout_constraintTop_toBottomOf="@+id/pass2" />
+
+            <Button
+                style="@style/Widget.Material3.Button.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:id="@+id/btnYes"
+                android:fontFamily="@font/roboto_bold"
+                android:text="OK"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/pass2"
+                app:layout_constraintTop_toBottomOf="@+id/pass2" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

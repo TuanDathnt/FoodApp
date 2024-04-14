@@ -76,6 +76,18 @@
         <action
             android:id="@+id/action_profileFragment2_to_languageSettingFragment"
             app:destination="@id/languageSettingFragment" />
+        <action
+            android:id="@+id/action_profileFragment2_to_personalScreenFragment"
+            app:destination="@id/personalScreenFragment" />
+        <action
+            android:id="@+id/action_profileFragment2_to_helpCenterFragment"
+            app:destination="@id/helpCenterFragment" />
+        <action
+            android:id="@+id/action_profileFragment2_to_helpCenterFragment2"
+            app:destination="@id/helpCenterFragment" />
+        <action
+            android:id="@+id/action_profileFragment2_to_aboutFoodaFragment"
+            app:destination="@id/aboutFoodaFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
@@ -157,4 +169,19 @@
             android:id="@+id/action_languageSettingFragment_to_profileFragment2"
             app:destination="@id/profileFragment2" />
     </fragment>
+    <fragment
+        android:id="@+id/personalScreenFragment"
+        android:name="com.example.foody.ui.fragments.profile.PersonalScreenFragment"
+        android:label="Personal"
+        tools:layout="@layout/fragment_personal_screen" />
+    <fragment
+        android:id="@+id/helpCenterFragment"
+        android:name="com.example.foody.ui.fragments.profile.HelpCenterFragment"
+        android:label="fragment_help_center"
+        tools:layout="@layout/fragment_help_center" />
+    <fragment
+        android:id="@+id/aboutFoodaFragment"
+        android:name="com.example.foody.ui.fragments.profile.AboutFoodaFragment"
+        android:label="fragment_about_fooda"
+        tools:layout="@layout/fragment_about_fooda" />
 </navigation>

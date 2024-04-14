@@ -40,12 +40,15 @@ class SignUpFragment : Fragment() {
 
                     firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
                         if (it.isSuccessful) {
+
+
                             findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
                         } else {
                             Toast.makeText(activity, it.exception.toString(), Toast.LENGTH_SHORT)
                                 .show()
 
                         }
+
                     }
                 } else {
                     Toast.makeText(activity, "Password is not matching", Toast.LENGTH_SHORT).show()

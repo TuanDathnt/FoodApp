@@ -1,6 +1,7 @@
 package com.example.foody.ui.fragments.profile
 
 import android.app.Activity
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
@@ -25,17 +26,32 @@ class LanguageSettingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val radioButtonCheck = AppCompatDelegate.getApplicationLocales()
         _binding = FragmentLanguageSettingBinding.inflate(inflater, container, false)
+        val sharedPreferences = requireActivity().getSharedPreferences("language", Context.MODE_PRIVATE)
+        val lang = sharedPreferences.getString("lang","en")
+        if(lang=="en"){
+            binding.radioButton1.isChecked=true
+        }
+        if(lang=="cn"){
+            binding.radioButton2.isChecked=true
+        }
+        if(lang=="vn"){
+            binding.radioButton3.isChecked=true
+        }
         // Inflate the layout for this fragment
         binding.radioButton1.setOnClickListener{
             setLocal("en")
+            setLang("en")
         }
         binding.radioButton2.setOnClickListener{
             setLocal("cn")
+            setLang("cn")
         }
         binding.radioButton3.setOnClickListener{
             setLocal("vn")
+            setLang("vn")
         }
 
         return binding.root
@@ -46,5 +62,11 @@ class LanguageSettingFragment : Fragment() {
         AppCompatDelegate.setApplicationLocales(
             LocaleListCompat.create(Locale.forLanguageTag(languageTag))
         )
+    }
+    private fun setLang(lang:String){
+        val sharedPreferences = requireActivity().getSharedPreferences("language", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("lang",lang)
+        editor.apply()
     }
 }

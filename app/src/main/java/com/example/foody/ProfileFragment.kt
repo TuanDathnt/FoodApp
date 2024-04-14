@@ -21,6 +21,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.foody.databinding.FragmentProfileBinding
 import com.example.foody.databinding.FragmentRecipesBinding
 import com.example.foody.ui.fragments.profile.ConfirmSheetFragment
@@ -33,8 +34,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
 import com.google.android.material.checkbox.MaterialCheckBox.CheckedState
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.storage
 
 
 class ProfileFragment : Fragment() {
@@ -47,14 +51,29 @@ class ProfileFragment : Fragment() {
 
     private lateinit var googleSignInClient:GoogleSignInClient
     private lateinit var auth : FirebaseAuth
+    private var storageRef = Firebase.storage
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        storageRef = FirebaseStorage.getInstance()
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         auth = FirebaseAuth.getInstance()
-        val currentUser = auth.currentUser
 
+
+        val currentUser = auth.currentUser
+        val userId = currentUser?.uid
+        val imageRef = storageRef.getReference("images/"+userId)
+        val image = binding.imageView4
+        imageRef.downloadUrl
+            .addOnSuccessListener { uri ->
+                // Thành công, sử dụng uri để hiển thị ảnh
+                Glide.with(this)
+                    .load(uri).circleCrop()
+                    .into(image)
+            }.addOnFailureListener { exception ->
+                image.setImageResource(R.drawable.avatar)
+            }
         if(currentUser!= null ){
             binding.textView3.text=currentUser.email
 
@@ -78,7 +97,7 @@ class ProfileFragment : Fragment() {
             binding.textView8.visibility =View.GONE
             binding.textView7.visibility =View.GONE
             binding.textView9.visibility =View.GONE
-            binding.textView10?.visibility =View.GONE
+
             binding.imageView10.visibility =View.GONE
             binding.imageView11.visibility =View.GONE
             binding.imageView12.visibility =View.GONE
@@ -167,6 +186,21 @@ class ProfileFragment : Fragment() {
 
         binding.ggButton.setOnClickListener {
             signInGoogle()
+        }
+        binding.imageView14.setOnClickListener{
+            findNavController().navigate(R.id.action_profileFragment2_to_aboutFoodaFragment)
+        }
+        binding.imageView11.setOnClickListener{
+            findNavController().navigate(R.id.action_profileFragment2_to_helpCenterFragment)
+        }
+        binding.imageView18.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment2_to_personalScreenFragment)
+        }
+        binding.textView9.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment2_to_personalScreenFragment)
+        }
+        binding.imageView10.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment2_to_personalScreenFragment)
         }
 
 

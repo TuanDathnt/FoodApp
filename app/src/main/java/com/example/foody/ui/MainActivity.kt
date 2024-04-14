@@ -34,8 +34,21 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val sharedPreferences = getSharedPreferences("mode", Context.MODE_PRIVATE)
+
+        var sharedPreferences = getSharedPreferences("mode", Context.MODE_PRIVATE)
         val myValue =  sharedPreferences.getBoolean("modenight", false)
+
+        sharedPreferences = getSharedPreferences("language", Context.MODE_PRIVATE)
+        val lang = sharedPreferences.getString("lang","en")
+        if(lang=="en"){
+            setLocal("en")
+        }
+        if(lang=="cn"){
+            setLocal("cn")
+        }
+        if(lang=="vn"){
+            setLocal("vn")
+        }
         when (myValue) {
             true -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -73,6 +86,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+    fun setLocal(langCode:String){
+        val languageTag = langCode
+        AppCompatDelegate.setApplicationLocales(
+            LocaleListCompat.create(Locale.forLanguageTag(languageTag))
+        )
     }
 
 }
